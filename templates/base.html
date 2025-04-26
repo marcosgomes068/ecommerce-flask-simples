@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}E-commerce{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+      body { background: #fff; }
+      .navbar, .btn-primary, .btn-success, .btn-warning, .btn-orange { background: #ff8800 !important; border: none; }
+      .navbar-brand, .navbar-nav .nav-link, .navbar-text, .btn, .form-label { color: #fff !important; }
+      .btn-outline-light { color: #ff8800 !important; border-color: #ff8800 !important; }
+      .btn-outline-light:hover { background: #ff8800 !important; color: #fff !important; }
+      .card { border: 1px solid #ff8800; }
+      .card-title, .card-text, .form-label { color: #ff8800; }
+      .btn-orange { color: #fff; background: #ff8800; }
+      .navbar { margin-bottom: 2rem; }
+      .form-control:focus { border-color: #ff8800; box-shadow: 0 0 0 0.2rem #ff880033; }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">E-commerce</a>
+    <div>
+      {% if current_user.is_authenticated %}
+        <span class="navbar-text me-2">Olá, {{ current_user.username }}!</span>
+        {% if current_user.is_admin %}
+          <a href="/produto/novo" class="btn btn-outline-light btn-sm me-2">Novo Produto</a>
+        {% endif %}
+        <a href="/logout" class="btn btn-outline-light btn-sm">Sair</a>
+      {% else %}
+        <a href="/login" class="btn btn-outline-light btn-sm me-2">Entrar</a>
+        <a href="/register" class="btn btn-outline-light btn-sm">Registrar</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="alert alert-{{ 'success' if category=='success' else 'danger' if category=='error' else 'info' }} d-flex align-items-center gap-2" role="alert" style="font-size:1.1em;">
+            {% if category=='success' %}<span class="bi bi-check-circle-fill text-success"></span>{% endif %}
+            {% if category=='error' %}<span class="bi bi-exclamation-triangle-fill text-danger"></span>{% endif %}
+            {{ msg }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Recuperar Senha{% endblock %}
+{% block content %}
+<h2 style="color:#ff8800;">Recuperar Senha</h2>
+<p>Informe seu e-mail cadastrado. Se existir, enviaremos um link para redefinir sua senha.</p>
+<form method="post">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">
+    {{ form.email.label(class="form-label") }}
+    {{ form.email(class="form-control", placeholder="Seu e-mail") }}
+  </div>
+  <button type="submit" class="btn btn-orange">Enviar link</button>
+</form>
+<a href="{{ url_for('login') }}" class="btn btn-link mt-3">Voltar ao login</a>
+{% endblock %}

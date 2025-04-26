@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Registrar{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card p-4 shadow">
+      <h2 class="mb-4 text-center" style="color:#ff8800;">Registrar</h2>
+      <form method="POST">
+          {{ form.hidden_tag() }}
+          <div class="mb-3">{{ form.username.label }}{{ form.username(class_="form-control") }}</div>
+          <div class="mb-3">{{ form.email.label }}{{ form.email(class_="form-control") }}</div>
+          <div class="mb-3">{{ form.password.label }}{{ form.password(class_="form-control") }}</div>
+          <div class="mb-3">{{ form.confirm.label }}{{ form.confirm(class_="form-control") }}</div>
+          <button type="submit" class="btn btn-orange w-100">Registrar</button>
+      </form>
+      <p class="mt-2 text-center"><a href="/login" style="color:#ff8800;">Já tem conta? Entrar</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

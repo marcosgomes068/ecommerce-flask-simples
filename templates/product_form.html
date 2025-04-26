@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Cadastrar Produto{% endblock %}
+{% block content %}
+<h2>Cadastrar Produto</h2>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">{{ form.name.label }}{{ form.name(class_="form-control") }}</div>
+    <div class="mb-3">{{ form.price.label }}{{ form.price(class_="form-control") }}</div>
+    <div class="mb-3">{{ form.description.label }}{{ form.description(class_="form-control") }}</div>
+    <div class="mb-3">{{ form.category.label }}{{ form.category(class_="form-control") }}</div>
+    <div class="mb-3">{{ form.image.label }}{{ form.image(class_="form-control") }}</div>
+    <button type="submit" class="btn btn-success">Salvar</button>
+</form>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Administração{% endblock %}
+{% block content %}
+<h2 style="color:#ff8800;">Área Administrativa</h2>
+<h4 class="mt-4">Produtos</h4>
+<table class="table table-bordered">
+  <thead>
+    <tr><th>ID</th><th>Nome</th><th>Preço</th><th>Categoria</th><th>Ações</th></tr>
+  </thead>
+  <tbody>
+    {% for p in produtos %}
+      <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.name }}</td>
+        <td>R$ {{ '%.2f'|format(p.price) }}</td>
+        <td>{{ p.category }}</td>
+        <td>
+          <a href="/produto/editar/{{ p.id }}" class="btn btn-outline-light btn-sm">Editar</a>
+          <form action="/produto/excluir/{{ p.id }}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">
+            <button type="submit" class="btn btn-outline-light btn-sm">Excluir</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<h4 class="mt-4">Pedidos</h4>
+<table class="table table-bordered">
+  <thead>
+    <tr><th>ID</th><th>Usuário</th><th>Data</th><th>Status</th><th>Ações</th></tr>
+  </thead>
+  <tbody>
+    {% for pedido in pedidos %}
+      <tr>
+        <td>{{ pedido.id }}</td>
+        <td>{{ pedido.user.username }}</td>
+        <td>{{ pedido.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+        <td>{{ pedido.status }}</td>
+        <td>
+          <a href="/alterar_status/{{ pedido.id }}/pago" class="btn btn-outline-light btn-sm">Marcar Pago</a>
+          <a href="/alterar_status/{{ pedido.id }}/cancelado" class="btn btn-outline-light btn-sm">Cancelar</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

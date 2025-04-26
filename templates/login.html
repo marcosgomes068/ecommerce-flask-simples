@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Entrar{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card p-4 shadow">
+      <h2 class="mb-4 text-center" style="color:#ff8800;">Entrar</h2>
+      <form method="POST">
+          {{ form.hidden_tag() }}
+          <div class="mb-3">{{ form.email.label }}{{ form.email(class_="form-control") }}</div>
+          <div class="mb-3">{{ form.password.label }}{{ form.password(class_="form-control") }}</div>
+          <button type="submit" class="btn btn-orange w-100">Entrar</button>
+      </form>
+      <p class="mt-2 text-center"><a href="/register" style="color:#ff8800;">Não tem conta? Cadastre-se</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

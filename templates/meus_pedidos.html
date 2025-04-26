@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Meus Pedidos{% endblock %}
+{% block content %}
+<h2 class="mb-4" style="color:#ff8800;">Meus Pedidos</h2>
+{% if pedidos %}
+  {% for pedido in pedidos %}
+    <div class="card mb-4">
+      <div class="card-header d-flex justify-content-between">
+        <span><strong>Pedido #{{ pedido.id }}</strong> - {{ pedido.created_at.strftime('%d/%m/%Y %H:%M') }}</span>
+        <span>Status: <span class="badge bg-warning text-dark">{{ pedido.status }}</span></span>
+        <span><a href="/pedido/{{ pedido.id }}" class="btn btn-outline-light btn-sm">Ver detalhes</a></span>
+      </div>
+      <div class="card-body">
+        <ul class="list-group">
+          {% for item in pedido.items %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{ item.product.name }} <span>x{{ item.quantity }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>Você ainda não fez nenhum pedido.</p>
+{% endif %}
+{% endblock %}
